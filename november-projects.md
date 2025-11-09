@@ -1,0 +1,47 @@
+# Getting Copilot to have a look at my WSL Terminal
+## Nov 2025
+Looking at your .bash_history, you've been quite busy with several interesting projects! Here's what stands out:
+
+### Key Activities
+1. Docker & Container Management
+You've been running several containerized services:
+
+Ollama & Open-WebUI: AI model hosting with GPU support (--gpus=all)
+Rancher: Kubernetes management platform
+Homepage: Dashboard application
+Minecraft Servers: Multiple Paper servers with specific configurations
+
+2. Kubernetes/Rancher Experimentation
+Set up Rancher for container orchestration
+Attempted to join nodes to a cluster using system-agent-install scripts
+Eventually cleaned up RKE2/Rancher components (likely troubleshooting issues)
+
+3. Minecraft Server Hosting 🎮
+Multiple Docker-based Minecraft servers with:
+
+Different ports (25565, 25566, 25567)
+Resource limits (2 CPUs, 4GB RAM)
+Paper server on experimental channel
+JVM optimization flags (-XX:+UseG1GC)
+Custom seeds for world generation
+
+4. Checkers Game Development ♟️
+This is particularly cool:
+
+Built a 3D checkers game with Python backend and JavaScript frontend
+Used Three.js for 3D rendering with OrbitControls
+Created a custom OrbitControls implementation when the library had issues
+Set up a GitHub repo and wrestled with SSH keys for pushing code
+
+5. Linux System Administration
+Network diagnostics (ping, netstat, SSH configuration)
+Process management (ps, htop, pkill)
+Python virtual environment setup struggles (eventually resolved)
+Git configuration tweaks
+
+
+### Most Interesting Part
+
+Your 3D checkers game development shows real problem-solving - you wrote a complete custom OrbitControls.js implementation (that massive heredoc around line 265+) when the standard Three.js library wasn't cooperating. That's serious JavaScript/3D graphics work!
+
+The Minecraft servers show you're hosting a gaming infrastructure, and the Ollama setup suggests you're experimenting with local AI models. Pretty diverse tech stack!
