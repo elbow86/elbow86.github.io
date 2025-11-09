@@ -1,0 +1,13 @@
+{
+  "name": "Jekyll Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/ruby:3",
+  "postCreateCommand": "gem install bundler && bundle install || true",
+  "forwardPorts": [4000],
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=\${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  }
+}

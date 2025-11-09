@@ -1,0 +1,7 @@
+title: elbow86
+email: your-email@example.com
+description: My Jekyll blog on GitHub Pages
+baseurl: ""
+url: "https://elbow86.github.io"
+markdown: kramdown
+theme: minima
