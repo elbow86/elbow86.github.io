@@ -15,13 +15,14 @@ Made a Solar System simulator with a bunch of features.
 
 Made a Commute calculator app.
 
-Made a subscription tracker app.  Persistence via localStorage
+Made a Subscription tracker app.  Persistence via localStorage
 -used OpenAI Codex for the main code
 
 ## Reflections
 
-[Add any thoughts or reflections about the weekend]
+Next I'll actually ensure to exercise the Skills
+
 
 ## Next Steps
 
-[Add any follow-up items or things you want to remember for next week]
+Publish to NAS
