@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Welcome to elbow86's Tech Space
+title: my Tech Space
 ---
 
 <div style="text-align: center; padding: 2rem 0; background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; border-radius: 10px; margin-bottom: 2rem;">
