@@ -7,11 +7,11 @@ title: Weekend of January 17, 2026
 
 Published various projects
 
-- [Meditation](https://moonunit.ca/meditation/meditation.html)
-- [Flow Field](https://moonunit.ca/meditation/flow-field.html)
-- [Solar System](https://moonunit.ca/solar/index.html)
-- [Squirrel](https://moonunit.ca/squirrel/index.html)
-- [Ball](https://moonunit.ca/ball/index.html)
-- [Commute Simulator](https://moonunit.ca/commute-simulator/index.html)
+- <a href="https://moonunit.ca/meditation/meditation.html" target="_blank">Meditation</a>
+- <a href="https://moonunit.ca/meditation/flow-field.html" target="_blank">Flow Field</a>
+- <a href="https://moonunit.ca/solar/index.html" target="_blank">Solar System</a>
+- <a href="https://moonunit.ca/squirrel/index.html" target="_blank">Squirrel</a>
+- <a href="https://moonunit.ca/ball/index.html" target="_blank">Ball</a>
+- <a href="https://moonunit.ca/commute-simulator/index.html" target="_blank">Commute Simulator</a>
 
 
