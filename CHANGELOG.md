@@ -14,6 +14,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Deployment information
   - Links to external projects
 
+- **SKILLS** - Added **frontend-design** skill for GitHub Copilot configuration to my User area so it is scoped across all my projects.  Here's the journey actually taken to get there:
+1. Added instruction in **.github/instructions** initially for this repo specifically
+2. **/workspaces/repos/pages/elbow86.github.io** for scoping to this repo
+3. **pages/.github/skills/frontend-design/SKILL.md** for scoping to all pages, including elbow86.github.io folder Note: (under **workspaces/repos** prefix is because I'm running this VSCode in a Dev Container) of the parent of this 
+repo (pages)
+3.  **User area** for scoping across all my repos (named **frontend-design-user** so can tell apart from repo-scoped skill)
+
 ### Changed - 2026-02-01
 - Renamed blog post files to use consistent date-based naming convention:
   - `weekend-january-11.md` → `2026-Jan-11.md`
