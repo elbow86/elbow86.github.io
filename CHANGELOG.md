@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added - 2026-02-01
+- Created comprehensive README.md with:
+  - Local development setup instructions
+  - How to add new posts
+  - File structure documentation
+  - Deployment information
+  - Links to external projects
+
 ### Changed - 2026-02-01
 - Renamed blog post files to use consistent date-based naming convention:
   - `weekend-january-11.md` → `2026-Jan-11.md`
@@ -15,9 +23,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `November8thProject.md` → `2025-Nov-8.md`
 - Updated all internal links in `index.md` to reference renamed files
 - Updated all internal links in `indexbak.md` to reference renamed files
+- Added all blog posts (including November posts) to "Recent Adventures" section in index.md
 
 ### Fixed - 2026-02-01
 - Converted plain YouTube URL to proper Markdown hyperlink in `2026-Jan-29.md`
+- Fixed incorrect title in `2025-Nov-8.md` (was "January 11, 2026", corrected to "November 8, 2025")
 
 ## [2026-01-29]
 
