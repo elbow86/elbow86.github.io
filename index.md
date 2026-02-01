@@ -9,6 +9,11 @@ layout: home
 
 ## 🚀 Recent Adventures
 
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 1.5rem;">
+  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Feb-1.html">February 1, 2026</a></h3>
+  <p style="margin-bottom: 0; color: #6c757d;">Skills vs Instructions in AI Agent Configuration</p>
+</div>
+
 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 1.5rem;">
   <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-29.html">Jan 29-Feb 1, 2026</a></h3>
   <p style="margin-bottom: 0; color: #6c757d;">GitHub Copilot CLI, MCP Apps, Dev Containers</p>
