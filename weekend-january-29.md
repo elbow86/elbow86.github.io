@@ -5,6 +5,7 @@ title: Weekend of January 17, 2026
 
 # January 29, 2026
 
+## GitHub Copilot CLI
 As per James M's Youtube..
 https://youtu.be/GsEPS1yHaHQ
  
@@ -17,7 +18,7 @@ and work away... cool
 Video goes on to cover using the Copilot SDK to leverage the Copilot CLI to make apps
 
 ---
-# MCP Apps
+## MCP Apps
 
 Lots of pain and fun.
 Because Windows... had to change some things.
@@ -30,3 +31,7 @@ Created
 - Family Budget Tool
 - Color Picker Tool
 
+---
+## Dev Containers
+
+Cool stuff.. re-familiarizing myself with them.
