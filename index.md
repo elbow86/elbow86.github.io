@@ -11,13 +11,28 @@ title: my Tech Space
 ## 🚀 Recent Adventures
 
 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-17.html">Weekend of January 17, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Latest updates and explorations</p>
+  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-29.html">Jan 29-Feb 1, 2026</a></h3>
+  <p style="margin-bottom: 0; color: #6c757d;">GitHub Copilot CLI, MCP Apps, Dev Containers</p>
 </div>
 
 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4a6fa5; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./2026-Jan-11.html">Weekend of January 10-11, 2026</a></h3>
+  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./2026-Jan-17.html">Weekend of January 17, 2026</a></h3>
+  <p style="margin-bottom: 0; color: #6c757d;">Published Projects</p>
+</div>
+
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #6c9bd1; margin-bottom: 1.5rem;">
+  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-11.html">Weekend of January 10-11, 2026</a></h3>
   <p style="margin-bottom: 0; color: #6c757d;">Weekend projects and discoveries</p>
+</div>
+
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #8ba8c7; margin-bottom: 1.5rem;">
+  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./2025-Nov-8.html">November 8, 2025</a></h3>
+  <p style="margin-bottom: 0; color: #6c757d;">Jekyll & GitHub Pages setup</p>
+</div>
+
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #9db5d1; margin-bottom: 1.5rem;">
+  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2025-Nov.html">November 2025</a></h3>
+  <p style="margin-bottom: 0; color: #6c757d;">WSL Terminal Adventures</p>
 </div>
 
 ## 💡 Project Showcase
