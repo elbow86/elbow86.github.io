@@ -11,12 +11,12 @@ title: my Tech Space
 ## 🚀 Recent Adventures
 
 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./weekend-january-17.html">Weekend of January 17, 2026</a></h3>
+  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-17.html">Weekend of January 17, 2026</a></h3>
   <p style="margin-bottom: 0; color: #6c757d;">Latest updates and explorations</p>
 </div>
 
 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4a6fa5; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./weekend-january-11.html">Weekend of January 10-11, 2026</a></h3>
+  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./2026-Jan-11.html">Weekend of January 10-11, 2026</a></h3>
   <p style="margin-bottom: 0; color: #6c757d;">Weekend projects and discoveries</p>
 </div>
 
@@ -32,13 +32,13 @@ title: my Tech Space
   <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 3px solid #2c5282;">
     <h3 style="margin-top: 0; color: #1e3a5f;">🖥️ WSL Terminal Adventures</h3>
     <p style="color: #6c757d;">Getting Copilot to explore my WSL Terminal setup and configuration</p>
-    <a href="./november-projects.html" style="color: #2c5282; text-decoration: none; font-weight: bold;">Read More →</a>
+    <a href="./2025-Nov.html" style="color: #2c5282; text-decoration: none; font-weight: bold;">Read More →</a>
   </div>
   
   <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 3px solid #4a6fa5;">
     <h3 style="margin-top: 0; color: #2c5282;">📝 Jekyll & GitHub Pages</h3>
     <p style="color: #6c757d;">Implementing Burke Holland's approach to building a blog with Jekyll on GitHub Pages</p>
-    <a href="./November8thProject.html" style="color: #4a6fa5; text-decoration: none; font-weight: bold;">Read More →</a>
+    <a href="./2025-Nov-8.html" style="color: #4a6fa5; text-decoration: none; font-weight: bold;">Read More →</a>
   </div>
 </div>
 
