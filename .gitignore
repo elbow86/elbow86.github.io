@@ -9,3 +9,5 @@ Gemfile.lock
 .env
 .vscode/
 Gemfile
+
+diagnosing/
