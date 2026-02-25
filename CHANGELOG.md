@@ -42,17 +42,6 @@ repo (pages)
   - Documented MCP Apps development (Game of Life, Family Budget Tool, Color Picker Tool)
   - Documented Dev Container learning
 
-## [2026-01-17]
-
-### Added
-- New blog post: Published Projects
-  - Links to Meditation app
-  - Links to Flow Field visualization
-  - Links to Solar System simulator
-  - Links to Squirrel game
-  - Links to Ball physics demo
-  - Links to Commute Simulator
-
 ## [2026-01-11]
 
 ### Added

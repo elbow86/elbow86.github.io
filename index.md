@@ -19,11 +19,6 @@ layout: home
   <p style="margin-bottom: 0; color: #6c757d;">GitHub Copilot CLI, MCP Apps, Dev Containers</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4a6fa5; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./2026-Jan-17.html">Weekend of January 17, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Published Projects</p>
-</div>
-
 <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #6c9bd1; margin-bottom: 1.5rem;">
   <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-11.html">Weekend of January 10-11, 2026</a></h3>
   <p style="margin-bottom: 0; color: #6c757d;">Weekend projects and discoveries</p>
@@ -42,12 +37,6 @@ layout: home
 ## 💡 Project Showcase
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
-  <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 3px solid #1e3a5f;">
-    <h3 style="margin-top: 0; color: #1e3a5f;">🪐 Solar System Simulator</h3>
-    <p style="color: #6c757d;">Interactive 3D simulation of our solar system with realistic orbital mechanics and planetary motion</p>
-    <a href="https://moonunit.ca/solar/index.html" style="color: #1e3a5f; text-decoration: none; font-weight: bold;">Explore Project →</a>
-  </div>
-
   <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 3px solid #2c5282;">
     <h3 style="margin-top: 0; color: #1e3a5f;">🖥️ WSL Terminal Adventures</h3>
     <p style="color: #6c757d;">Getting Copilot to explore my WSL Terminal setup and configuration</p>

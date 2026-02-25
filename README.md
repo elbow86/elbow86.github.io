@@ -142,18 +142,9 @@ Check the "Actions" tab in the GitHub repository to see build/deploy status.
 
 ### Recent Posts
 - **2026-Jan-29**: GitHub Copilot CLI, MCP Apps, Dev Containers
-- **2026-Jan-17**: Published Projects (Meditation, Solar System, etc.)
 - **2026-Jan-11**: Solar System simulator, Commute calculator, Subscription tracker
 - **2025-Nov-8**: Jekyll & GitHub Pages setup
 - **2025-Nov**: WSL Terminal exploration
-
-### External Projects
-- [Solar System Simulator](https://moonunit.ca/solar/index.html)
-- [Meditation App](https://moonunit.ca/meditation/meditation.html)
-- [Flow Field Visualization](https://moonunit.ca/meditation/flow-field.html)
-- [Squirrel Game](https://moonunit.ca/squirrel/index.html)
-- [Ball Physics Demo](https://moonunit.ca/ball/index.html)
-- [Commute Simulator](https://moonunit.ca/commute-simulator/index.html)
 
 ## 📖 Resources
 
