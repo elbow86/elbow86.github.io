@@ -1,5 +1,33 @@
 ---
 layout: home
+ai_blogs:
+  - name: Simon Willison
+    url: https://simonwillison.net/
+    note: Practical AI tooling and experiments
+  - name: Latent Space
+    url: https://www.latent.space/
+    note: Deep dives on LLM engineering
+  - name: Burke Holland
+    url: https://burkeholland.github.io/
+    note: Developer insights and learning journeys
+  - name: OpenAI News
+    url: https://openai.com/news/
+    note: Model updates and product releases
+  - name: OpenAI Developers Blog
+    url: https://developers.openai.com/blog
+    note: OpenAI platform and API updates
+  - name: OpenAI Codex
+    url: https://developers.openai.com/blog/topic/codex
+    note: AI code generation and Codex updates
+  - name: Claude Blog
+    url: https://claude.com/blog
+    note: Anthropic Claude product announcements
+  - name: Anthropic News
+    url: https://www.anthropic.com/news
+    note: Research and product posts
+  - name: Hugging Face Blog
+    url: https://huggingface.co/blog
+    note: Open-source AI ecosystem updates
 ---
 
 <div style="text-align: center; padding: 2rem 0; background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; border-radius: 10px; margin-bottom: 2rem;">
@@ -9,44 +37,57 @@ layout: home
 
 ## 🚀 Recent Adventures
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0d2847; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #0d2847;">📅 <a href="./2026-Mar-08.html">March 8, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Harnessing OpenClaw - Orchestrating Multiple AI Agents</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #0d2847; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #0d2847;">📅 <a href="./2026-Mar-08.html">March 8, 2026</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">Harnessing OpenClaw - Orchestrating Multiple AI Agents</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Feb-7.html">February 7, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Home Assistant MCP Server</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #1e3a5f;">📅 <a href="./2026-Feb-7.html">February 7, 2026</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">Home Assistant MCP Server</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Feb-1.html">February 1, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Skills vs Instructions in AI Agent Configuration</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #1e3a5f;">📅 <a href="./2026-Feb-1.html">February 1, 2026</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">Skills vs Instructions in AI Agent Configuration</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-29.html">Jan 29-Feb 1, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">GitHub Copilot CLI, MCP Apps, Dev Containers</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #1e3a5f;">📅 <a href="./2026-Jan-29.html">Jan 29-Feb 1, 2026</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">GitHub Copilot CLI, MCP Apps, Dev Containers</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4a6fa5; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-17.html">January 17, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Projects - Interactive Web Apps & MCP Tools</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #4a6fa5; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #1e3a5f;">📅 <a href="./2026-Jan-17.html">January 17, 2026</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">Projects - Interactive Web Apps & MCP Tools</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #6c9bd1; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Jan-11.html">Weekend of January 10-11, 2026</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Weekend projects and discoveries</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #6c9bd1; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #1e3a5f;">📅 <a href="./2026-Jan-11.html">Weekend of January 10-11, 2026</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">Weekend projects and discoveries</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #8ba8c7; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #2c5282;">📅 <a href="./2025-Nov-8.html">November 8, 2025</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">Jekyll & GitHub Pages setup</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #8ba8c7; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #2c5282;">📅 <a href="./2025-Nov-8.html">November 8, 2025</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">Jekyll & GitHub Pages setup</p>
 </div>
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #9db5d1; margin-bottom: 1.5rem;">
-  <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2025-Nov.html">November 2025</a></h3>
-  <p style="margin-bottom: 0; color: #6c757d;">WSL Terminal Adventures</p>
+<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #9db5d1; margin-bottom: 0.8rem;">
+  <h3 style="margin: 0; font-size: 1rem; color: #1e3a5f;">📅 <a href="./2025-Nov.html">November 2025</a></h3>
+  <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #6c757d;">WSL Terminal Adventures</p>
+</div>
+
+## 🤖 Favorite AI Blogs
+
+<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0d2847; margin-bottom: 2rem;">
+  <ul style="margin: 0; padding-left: 1.2rem;">
+    {% for blog in page.ai_blogs %}
+      <li style="margin-bottom: 0.7rem;">
+        <a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer">{{ blog.name }}</a>
+        <span style="color: #6c757d;"> - {{ blog.note }}</span>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
 
 ## 💡 Project Showcase
