@@ -4,15 +4,7 @@ baseurl: ""
 url: "https://elbow86.github.io"
 markdown: kramdown
 theme: minima
-header_pages:
-  - 2025-Nov-8.md
-  - 2025-Nov.md
-  - 2026-Feb-1.md
-  - 2026-Feb-7.md
-  - 2026-Jan-11.md
-  - 2026-Jan-17.md
-  - 2026-Jan-29.md
-  - 2026-Mar-08.md
+header_pages: []
 minima:
   social_links:
     - { platform: github, user_url: "https://github.com/elbow86" }

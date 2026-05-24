@@ -34,53 +34,41 @@ ai_blogs:
     note: Deep dives on LLM engineering
 ---
 
-<div style="text-align: center; padding: 2rem 0; background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%); color: white; border-radius: 10px; margin-bottom: 2rem;">
-  <h1 style="margin: 0; font-size: 2.5rem; font-weight: bold;">👋 Tech Journey</h1>
-  <p style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.95;">...</p>
+<div class="journey-hero reveal-up">
+  <h1>Human in the Loop</h1>
+  <p>Experiments in coding with AI, from first prompt to finished result.</p>
 </div>
 
 ## 🚀 Recent Adventures
 
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #0d2847; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2026-Mar-08.html" style="color: #0d2847; text-decoration: none; font-weight: 500;">March 8, 2026</a> — Harnessing OpenClaw - Orchestrating Multiple AI Agents</p>
-</div>
+<div class="adventures-shell reveal-up reveal-up-delay-1">
+  <a class="adventure-featured" href="./2026-May-24.html">
+    <span class="adventure-featured-badge">Latest Log</span>
+    <h3>March Through May Projects</h3>
+    <p>Ralph Loop, Copilot Assistant, Codex and Claude workflows, and the LLM Wiki all in one sprint recap.</p>
+    <span class="adventure-featured-meta">2026-05-24 • Read entry -></span>
+  </a>
 
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2026-Feb-7.html" style="color: #1e3a5f; text-decoration: none; font-weight: 500;">February 7, 2026</a> — Home Assistant MCP Server</p>
-</div>
-
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #1e3a5f; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2026-Feb-1.html" style="color: #1e3a5f; text-decoration: none; font-weight: 500;">February 1, 2026</a> — Skills vs Instructions in AI Agent Configuration</p>
-</div>
-
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2026-Jan-29.html" style="color: #1e3a5f; text-decoration: none; font-weight: 500;">Jan 29-Feb 1, 2026</a> — GitHub Copilot CLI, MCP Apps, Dev Containers</p>
-</div>
-
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #4a6fa5; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2026-Jan-17.html" style="color: #1e3a5f; text-decoration: none; font-weight: 500;">January 17, 2026</a> — Projects - Interactive Web Apps & MCP Tools</p>
-</div>
-
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #6c9bd1; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2026-Jan-11.html" style="color: #1e3a5f; text-decoration: none; font-weight: 500;">Weekend of January 10-11, 2026</a> — Weekend projects and discoveries</p>
-</div>
-
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #8ba8c7; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2025-Nov-8.html" style="color: #2c5282; text-decoration: none; font-weight: 500;">November 8, 2025</a> — Jekyll & GitHub Pages setup</p>
-</div>
-
-<div style="background: #f8f9fa; padding: 0.9rem 1rem; border-radius: 8px; border-left: 4px solid #9db5d1; margin-bottom: 0.8rem;">
-  <p style="margin: 0; font-size: 0.9rem; color: #333;">📅 <a href="./2025-Nov.html" style="color: #1e3a5f; text-decoration: none; font-weight: 500;">November 2025</a> — WSL Terminal Adventures</p>
+  <div class="adventure-timeline" role="list" aria-label="Recent adventures timeline">
+    <a class="adventure-row" role="listitem" href="./2026-Mar-08.html"><span class="adventure-date">2026-03-08</span><span class="adventure-main"><span class="adventure-title">Harnessing OpenClaw - Orchestrating Multiple AI Agents</span><span class="adventure-tags"><span class="adventure-tag">AI agents</span><span class="adventure-tag">Orchestration</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2026-Feb-7.html"><span class="adventure-date">2026-02-07</span><span class="adventure-main"><span class="adventure-title">Home Assistant MCP Server</span><span class="adventure-tags"><span class="adventure-tag">Home automation</span><span class="adventure-tag">MCP</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2026-Feb-1.html"><span class="adventure-date">2026-02-01</span><span class="adventure-main"><span class="adventure-title">Skills vs Instructions in AI Agent Configuration</span><span class="adventure-tags"><span class="adventure-tag">AI config</span><span class="adventure-tag">Prompting</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2026-Jan-29.html"><span class="adventure-date">2026-01-29</span><span class="adventure-main"><span class="adventure-title">GitHub Copilot CLI, MCP Apps, Dev Containers</span><span class="adventure-tags"><span class="adventure-tag">Tooling</span><span class="adventure-tag">Devcontainers</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2026-Jan-17.html"><span class="adventure-date">2026-01-17</span><span class="adventure-main"><span class="adventure-title">Projects - Interactive Web Apps and MCP Tools</span><span class="adventure-tags"><span class="adventure-tag">Web apps</span><span class="adventure-tag">MCP tools</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2026-Jan-11.html"><span class="adventure-date">2026-01-11</span><span class="adventure-main"><span class="adventure-title">Weekend projects and discoveries</span><span class="adventure-tags"><span class="adventure-tag">Weekend build</span><span class="adventure-tag">Experiments</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2025-Nov-8.html"><span class="adventure-date">2025-11-08</span><span class="adventure-main"><span class="adventure-title">Jekyll and GitHub Pages setup</span><span class="adventure-tags"><span class="adventure-tag">Jekyll</span><span class="adventure-tag">GitHub Pages</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2025-Nov.html"><span class="adventure-date">2025-11</span><span class="adventure-main"><span class="adventure-title">WSL Terminal Adventures</span><span class="adventure-tags"><span class="adventure-tag">WSL</span><span class="adventure-tag">CLI</span></span></span></a>
+  </div>
 </div>
 
 ## 🤖 Favorite AI Blogs
 
-<div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0d2847; margin-bottom: 2rem;">
-  <ul style="margin: 0; padding-left: 1.2rem;">
+<div class="blog-panel reveal-up reveal-up-delay-1">
+  <ul>
     {% for blog in page.ai_blogs %}
-      <li style="margin-bottom: 0.7rem;">
+      <li>
         <a href="{{ blog.url }}" target="_blank" rel="noopener noreferrer">{{ blog.name }}</a>
-        <span style="color: #6c757d;"> - {{ blog.note }}</span>
+        <span class="blog-note"> - {{ blog.note }}</span>
       </li>
     {% endfor %}
   </ul>
@@ -88,31 +76,36 @@ ai_blogs:
 
 ## 💡 Project Showcase
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
-  <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 3px solid #2c5282;">
-    <h3 style="margin-top: 0; color: #1e3a5f;">🖥️ WSL Terminal Adventures</h3>
-    <p style="color: #6c757d;">Getting Copilot to explore my WSL Terminal setup and configuration</p>
-    <a href="./2025-Nov.html" style="color: #2c5282; text-decoration: none; font-weight: bold;">Read More →</a>
+<div class="showcase-grid reveal-up reveal-up-delay-2">
+  <div class="showcase-card">
+    <h3>WSL Terminal Adventures</h3>
+    <p>Getting Copilot to explore my WSL terminal setup and configuration.</p>
+    <a href="./2025-Nov.html">Read More -></a>
   </div>
   
-  <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 3px solid #4a6fa5;">
-    <h3 style="margin-top: 0; color: #2c5282;">📝 Jekyll & GitHub Pages</h3>
-    <p style="color: #6c757d;">Implementing Burke Holland's approach to building a blog with Jekyll on GitHub Pages</p>
-    <a href="./2025-Nov-8.html" style="color: #4a6fa5; text-decoration: none; font-weight: bold;">Read More →</a>
+  <div class="showcase-card">
+    <h3>Jekyll and GitHub Pages</h3>
+    <p>Implementing Burke Holland's approach to building a blog with Jekyll on GitHub Pages.</p>
+    <a href="./2025-Nov-8.html">Read More -></a>
   </div>
 </div>
 
-## 🛠️ What I'm Working On
+## 🧪 Latest Projects (March-May 2026)
 
-- Exploring AI-powered development tools
-- Building with Jekyll and GitHub Pages
-- Terminal customization and productivity
-- Documenting recent learning journey
+<div class="projects-latest reveal-up reveal-up-delay-2">
+  <ul>
+    <li><strong>Ralph Loop</strong></li>
+    <li><strong>Copilot Assistant</strong></li>
+    <li><strong>OpenAI Codex and Claude Desktop</strong> (Chat/Cowork/Code)</li>
+    <li><strong>LLM Wiki</strong></li>
+  </ul>
+</div>
+
 
 ---
 
-<div style="text-align: center; padding: 1rem; color: #6c757d; font-size: 0.9rem;">
-  <p>✨ Built with Jekyll • Hosted on GitHub Pages • Updated January 2026</p>
+<div class="home-footer-note">
+  <p>✨ Built with Jekyll • Hosted on GitHub Pages • Updated May 2026</p>
 </div>
 
 

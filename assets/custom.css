@@ -1,0 +1,363 @@
+:root {
+  --ink-900: #14213d;
+  --ink-700: #1f386b;
+  --ink-500: #2d5a91;
+  --accent-500: #ff8b37;
+  --accent-300: #ffc88c;
+  --paper-100: #f8f7f3;
+  --paper-200: #ece9df;
+  --text-900: #182135;
+  --text-700: #44506a;
+  --line-soft: rgba(20, 33, 61, 0.14);
+  --shadow-soft: 0 16px 40px rgba(20, 33, 61, 0.12);
+  --shadow-hover: 0 24px 52px rgba(20, 33, 61, 0.2);
+}
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: var(--text-900);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255, 139, 55, 0.2) 0%, rgba(255, 139, 55, 0) 38%),
+    radial-gradient(circle at 90% 0%, rgba(45, 90, 145, 0.18) 0%, rgba(45, 90, 145, 0) 42%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(20, 33, 61, 0.02),
+      rgba(20, 33, 61, 0.02) 6px,
+      transparent 6px,
+      transparent 16px
+    ),
+    var(--paper-100);
+}
+
+.site-header {
+  border-top: 6px solid var(--accent-500);
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(248, 247, 243, 0.88);
+  backdrop-filter: blur(6px);
+}
+
+/* Hide Minima's top header/nav block */
+.site-header {
+  display: none;
+}
+
+.page-content {
+  padding-top: 0;
+}
+
+.site-title,
+.site-title:visited {
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: var(--ink-900);
+}
+
+.page-link {
+  font-family: "IBM Plex Mono", monospace;
+  color: var(--ink-700);
+}
+
+.page-link:hover {
+  color: var(--accent-500);
+  text-decoration: none;
+}
+
+.home .post-list,
+.home .rss-subscribe {
+  display: none;
+}
+
+.journey-hero {
+  padding: 2.6rem 1.4rem;
+  margin: 0.4rem 0 2rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(120deg, rgba(20, 33, 61, 0.96), rgba(31, 56, 107, 0.9)),
+    radial-gradient(circle at 85% 20%, rgba(255, 139, 55, 0.3), rgba(255, 139, 55, 0));
+  color: #fff;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.journey-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.journey-hero p {
+  margin: 0.9rem auto 0;
+  max-width: 48ch;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.08rem;
+}
+
+.home h2 {
+  margin-top: 2.3rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+  color: var(--ink-900);
+  border-bottom: 2px solid var(--line-soft);
+  padding-bottom: 0.35rem;
+}
+
+.adventures-shell {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
+  align-items: start;
+}
+
+.adventure-featured {
+  display: block;
+  text-decoration: none;
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 139, 55, 0.28);
+  background:
+    linear-gradient(165deg, rgba(20, 33, 61, 0.98), rgba(31, 56, 107, 0.95)),
+    radial-gradient(circle at 80% 12%, rgba(255, 139, 55, 0.35), rgba(255, 139, 55, 0));
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.adventure-featured:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.adventure-featured-badge {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 200, 140, 0.7);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  background: rgba(255, 139, 55, 0.28);
+}
+
+.adventure-featured h3 {
+  margin: 0;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.adventure-featured p {
+  margin: 0.75rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.adventure-featured-meta {
+  margin-top: 0.9rem;
+  display: inline-block;
+  color: var(--accent-300);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+}
+
+.adventure-timeline {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.adventure-row {
+  position: relative;
+  display: block;
+  padding: 0.78rem 0.95rem 0.84rem;
+  text-decoration: none;
+  color: var(--text-900);
+  border-bottom: 1px solid rgba(20, 33, 61, 0.08);
+  transition: background-color 160ms ease, padding-left 160ms ease, border-color 160ms ease;
+}
+
+.adventure-row:last-child {
+  border-bottom: 0;
+}
+
+.adventure-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background-color 160ms ease;
+}
+
+.adventure-row:hover {
+  background: rgba(255, 139, 55, 0.08);
+  padding-left: 1.05rem;
+  border-color: rgba(255, 139, 55, 0.25);
+}
+
+.adventure-row:hover::before {
+  background: var(--accent-500);
+}
+
+.adventure-date {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  color: var(--ink-700);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.24rem;
+}
+
+.adventure-main {
+  display: grid;
+  gap: 0.32rem;
+}
+
+.adventure-title {
+  display: block;
+  font-weight: 700;
+  color: var(--ink-900);
+  line-height: 1.2;
+}
+
+.adventure-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.adventure-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(45, 90, 145, 0.24);
+  border-radius: 999px;
+  padding: 0.11rem 0.46rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--ink-700);
+  background: rgba(45, 90, 145, 0.08);
+}
+
+.blog-panel,
+.projects-latest {
+  margin-top: 0.9rem;
+  padding: 1.2rem;
+  border-radius: 14px;
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 247, 243, 0.92));
+  box-shadow: var(--shadow-soft);
+}
+
+.blog-panel ul,
+.projects-latest ul {
+  margin: 0;
+}
+
+.blog-panel li {
+  margin-bottom: 0.62rem;
+}
+
+.blog-panel a {
+  color: var(--ink-700);
+  font-weight: 700;
+}
+
+.blog-note {
+  color: var(--text-700);
+}
+
+.showcase-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.showcase-card {
+  background: #fff;
+  border: 1px solid var(--line-soft);
+  border-top: 4px solid var(--ink-500);
+  border-radius: 14px;
+  padding: 1.1rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.showcase-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.showcase-card h3 {
+  margin-top: 0;
+  color: var(--ink-900);
+}
+
+.showcase-card p {
+  color: var(--text-700);
+}
+
+.showcase-card a {
+  color: var(--accent-500);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.showcase-card a:hover {
+  text-decoration: underline;
+}
+
+.projects-latest li {
+  margin-bottom: 0.4rem;
+}
+
+.home-footer-note {
+  margin: 2.2rem 0 0.5rem;
+  text-align: center;
+  color: var(--text-700);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.84rem;
+}
+
+.reveal-up {
+  animation: reveal-up 550ms ease both;
+}
+
+.reveal-up-delay-1 {
+  animation-delay: 90ms;
+}
+
+.reveal-up-delay-2 {
+  animation-delay: 180ms;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .journey-hero {
+    padding: 2.1rem 1rem;
+  }
+
+  .adventures-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .adventure-row {
+    padding: 0.75rem 0.8rem;
+  }
+}
