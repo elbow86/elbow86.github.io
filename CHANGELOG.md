@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+### Added - 2026-05-24
+- New blog post: `2026-May-24.md` (March Through May 2026 Projects)
+  - Ralph Loop
+  - Copilot Assistant (Burke Holland)
+  - Codex and Claude (Chat/Cowork/Code)
+  - LLM Wiki
+
+### Changed - 2026-05-24
+- Updated `index.md` to add a new "Recent Adventures" entry linking to `2026-May-24.html`
+- Refreshed homepage visual design in `index.md` with structured card sections, clearer hierarchy, and updated content blocks
+- Added `_includes/custom-head.html` to load custom fonts and a dedicated stylesheet
+- Added `_includes/head.html` override to explicitly include `custom-head.html` because Minima 2.5.2 does not include that hook by default
+- Added `assets/custom.css` with a new design system, textured background, responsive layout, and reveal/hover animations
+- Added `assets/main.scss` with Minima import plus post-theme custom rules, ensuring visual overrides reliably apply via `/assets/main.css`
+- Improved "Recent Adventures" treatment with a featured latest entry and timeline-style archive list for better scanning
+- Refined timeline entries to reduce single-line clutter by stacking date/title metadata and adding compact topic tags
+- Updated homepage hero copy to "Human in the Loop" with a new subheader focused on AI-assisted coding workflow
+
 ### Added - 2026-02-01
 - Created comprehensive README.md with:
   - Local development setup instructions
