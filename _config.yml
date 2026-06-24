@@ -4,7 +4,8 @@ baseurl: ""
 url: "https://elbow86.github.io"
 markdown: kramdown
 theme: minima
-header_pages: []
+header_pages:
+  - maps.md
 minima:
   social_links:
     - { platform: github, user_url: "https://github.com/elbow86" }

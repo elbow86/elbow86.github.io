@@ -118,6 +118,11 @@ Update `index.md` to add your new post to the "Recent Adventures" section:
 - Markdown links: `[Link Text](./filename.html)`
 - Update `CHANGELOG.md` when adding new posts
 
+## 🗺️ Interactive Maps
+
+- [Maps](./maps/) collects standalone interactive map pages published with the site.
+- [Rondeau Area OpenStreetMap](./Rondeau-Area-OpenStreetMap.html) is available as a direct HTML page for the June-July 2026 trip.
+
 ## 🎨 Styling
 
 The site uses custom inline styling with a blue color scheme:

@@ -91,6 +91,12 @@ ai_blogs:
     <p>Implementing Burke Holland's approach to building a blog with Jekyll on GitHub Pages.</p>
     <a href="./2025-Nov-8.html">Read More -></a>
   </div>
+
+  <div class="showcase-card">
+    <h3>Rondeau Area OSM Map</h3>
+    <p>An interactive OpenStreetMap trip planner for the June-July 2026 Rondeau camping trip.</p>
+    <a href="{{ '/Rondeau-Area-OpenStreetMap.html' | relative_url }}">Open Map -></a>
+  </div>
 </div>
 
 ## 🧪 Latest Projects (March-May 2026)
