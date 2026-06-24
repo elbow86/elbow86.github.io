@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switzerland 2026 — Trip Dashboard</title>
+<style>
+:root { color-scheme: light; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f5f4f0; color: #1a1a18; font-size: 14px; line-height: 1.6; min-height: 100vh; }
+
+/* ─── HEADER ─── */
+.header { background: #fff; border-bottom: 1px solid #e4e1d8; padding: 20px 24px 18px; }
+.header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.trip-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: #1D9E75; margin-bottom: 4px; }
+.trip-title { font-size: 22px; font-weight: 500; color: #1a1a18; line-height: 1.2; }
+.trip-sub { font-size: 13px; color: #888780; margin-top: 3px; }
+
+/* Countdown */
+.countdown-wrap { text-align: right; }
+.cd-label { font-size: 11px; color: #888780; margin-bottom: 6px; }
+.cd-digits { display: flex; align-items: flex-end; gap: 2px; justify-content: flex-end; }
+.cd-unit { text-align: center; min-width: 42px; }
+.cd-num { font-size: 28px; font-weight: 500; color: #1D9E75; line-height: 1; letter-spacing: -0.5px; }
+.cd-sep { font-size: 22px; color: #ccc9c0; padding-bottom: 4px; line-height: 1; }
+.cd-lbl { font-size: 10px; color: #aaa8a0; margin-top: 2px; }
+.cd-done { font-size: 18px; font-weight: 500; color: #1D9E75; }
+
+/* Stats bar */
+.stats-bar { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.stat-pill { background: #f0ede6; border-radius: 20px; padding: 5px 12px; display: flex; align-items: center; gap: 6px; }
+.stat-pill-val { font-size: 13px; font-weight: 500; color: #1a1a18; }
+.stat-pill-lbl { font-size: 11px; color: #888780; }
+
+/* ─── TABS ─── */
+.tabs { background: #fff; border-bottom: 1px solid #e4e1d8; display: flex; padding: 0 24px; overflow-x: auto; }
+.tab { padding: 12px 16px; font-size: 13px; font-weight: 500; color: #888780; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.12s; user-select: none; }
+.tab:hover { color: #444; }
+.tab.active { color: #1D9E75; border-bottom-color: #1D9E75; }
+
+/* ─── CONTENT ─── */
+.content { padding: 20px 24px; max-width: 820px; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* ─── ITINERARY ─── */
+.day-card { background: #fff; border: 0.5px solid #e4e1d8; border-radius: 12px; padding: 16px 18px; margin-bottom: 10px; transition: border-color 0.15s; }
+.day-card.today { border: 2px solid #1D9E75; box-shadow: 0 0 0 3px #1D9E7514; }
+.day-card.past { opacity: 0.5; }
+.day-card-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.day-num { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+.day-num.type-normal  { background: #E1F5EE; color: #0F6E56; }
+.day-num.type-travel  { background: #E6F1FB; color: #185FA5; }
+.day-num.type-arrival { background: #FAEEDA; color: #854F0B; }
+.day-num.type-depart  { background: #FAECE7; color: #993C1D; }
+.day-num.type-today   { background: #1D9E75; color: #fff; }
+.day-head-text { flex: 1; min-width: 0; }
+.day-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.day-title { font-size: 15px; font-weight: 500; color: #1a1a18; }
+.today-chip { font-size: 10px; font-weight: 600; background: #1D9E75; color: #fff; border-radius: 10px; padding: 2px 8px; letter-spacing: 0.04em; }
+.day-meta { font-size: 12px; color: #888780; margin-top: 2px; }
+.day-body { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 540px) { .day-body { grid-template-columns: 1fr; } }
+.day-field-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #b4b2a9; margin-bottom: 3px; }
+.day-field-val { font-size: 13px; color: #2c2c2a; line-height: 1.5; }
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+.tag { font-size: 10px; font-weight: 500; border-radius: 4px; padding: 2px 7px; }
+.tag-pass    { background: #E1F5EE; color: #0F6E56; }
+.tag-surcharge { background: #FAEEDA; color: #854F0B; }
+.tag-note    { background: #f0ede6; color: #5F5E5A; }
+
+/* ─── HOTELS ─── */
+.hotel-card { background: #fff; border: 0.5px solid #e4e1d8; border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; }
+.hotel-card.current-stay { border: 2px solid #1D9E75; }
+.hotel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.hotel-name { font-size: 16px; font-weight: 500; color: #1a1a18; }
+.hotel-dates { font-size: 12px; color: #888780; margin-bottom: 14px; }
+.hotel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 480px) { .hotel-grid { grid-template-columns: 1fr; } }
+.hotel-field-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #b4b2a9; margin-bottom: 2px; }
+.hotel-field-val { font-size: 13px; color: #2c2c2a; }
+.current-badge { font-size: 10px; font-weight: 600; background: #1D9E75; color: #fff; border-radius: 10px; padding: 3px 10px; letter-spacing: 0.04em; }
+
+/* ─── REMINDERS ─── */
+.rem-section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #888780; margin: 20px 0 8px; }
+.rem-section-title:first-child { margin-top: 0; }
+.rem-item { display: flex; align-items: flex-start; gap: 10px; background: #fff; border: 0.5px solid #e4e1d8; border-radius: 8px; padding: 11px 14px; margin-bottom: 6px; }
+.rem-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.rem-dot.critical { background: #E24B4A; }
+.rem-dot.high     { background: #EF9F27; }
+.rem-dot.medium   { background: #378ADD; }
+.rem-text { font-size: 13px; color: #2c2c2a; font-weight: 500; }
+.rem-note { font-size: 11px; color: #888780; margin-top: 2px; line-height: 1.4; }
+
+/* ─── FLIGHTS ─── */
+.flight-card { background: #fff; border: 0.5px solid #e4e1d8; border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; }
+.flight-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.flight-num { font-size: 15px; font-weight: 500; color: #1a1a18; }
+.f-badge { font-size: 11px; font-weight: 500; border-radius: 10px; padding: 3px 10px; }
+.f-badge.upcoming  { background: #E1F5EE; color: #0F6E56; }
+.f-badge.completed { background: #f0ede6; color: #888780; }
+.flight-route { display: flex; align-items: center; gap: 0; margin-bottom: 16px; }
+.airport { flex: 1; }
+.airport.right { text-align: right; }
+.iata { font-size: 30px; font-weight: 500; color: #1a1a18; line-height: 1; }
+.airport-city { font-size: 11px; color: #888780; margin-top: 2px; }
+.flight-line { flex: 2; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 12px; }
+.f-line-bar { width: 100%; height: 1px; background: #e4e1d8; position: relative; }
+.f-line-bar::after { content: ''; position: absolute; right: -1px; top: -3px; width: 7px; height: 7px; border-top: 1px solid #e4e1d8; border-right: 1px solid #e4e1d8; transform: rotate(45deg); }
+.f-duration { font-size: 11px; color: #888780; }
+.flight-times { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 14px; }
+.f-time-block.right { text-align: right; }
+.f-time-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #b4b2a9; }
+.f-time { font-size: 22px; font-weight: 500; color: #1a1a18; line-height: 1.1; }
+.f-date { font-size: 11px; color: #888780; }
+.flight-details { display: flex; gap: 20px; flex-wrap: wrap; padding-top: 14px; border-top: 0.5px solid #f0ede6; }
+.fd-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #b4b2a9; }
+.fd-val { font-size: 13px; color: #2c2c2a; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<div class="header">
+  <div class="header-row">
+    <div>
+      <div class="trip-label">&#127480;&#127464; Switzerland 2026</div>
+      <div class="trip-title">Brockelbank Family Trip</div>
+      <div class="trip-sub">Ted &amp; Diane + Christopher (14) &nbsp;·&nbsp; Aug 24 – Sep 3</div>
+    </div>
+    <div class="countdown-wrap">
+      <div class="cd-label">Departure countdown</div>
+      <div class="cd-digits" id="countdown">
+        <div class="cd-unit"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl">days</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">hrs</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">min</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-num" id="cd-s">--</div><div class="cd-lbl">sec</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-pill"><span class="stat-pill-val">10</span><span class="stat-pill-lbl">nights</span></div>
+    <div class="stat-pill"><span class="stat-pill-val">3</span><span class="stat-pill-lbl">cities</span></div>
+    <div class="stat-pill"><span class="stat-pill-val">3</span><span class="stat-pill-lbl">travelers</span></div>
+    <div class="stat-pill"><span class="stat-pill-val">AC 880</span><span class="stat-pill-lbl">outbound</span></div>
+    <div class="stat-pill"><span class="stat-pill-val">CYEDU3</span><span class="stat-pill-lbl">booking ref</span></div>
+    <div class="stat-pill"><span class="stat-pill-val">19H / J / K</span><span class="stat-pill-lbl">seats</span></div>
+  </div>
+</div>
+
+<!-- ─── TABS ─── -->
+<div class="tabs">
+  <div class="tab active" data-tab="itinerary" onclick="showTab(this)">Itinerary</div>
+  <div class="tab" data-tab="hotels" onclick="showTab(this)">Hotels</div>
+  <div class="tab" data-tab="flights" onclick="showTab(this)">Flights</div>
+  <div class="tab" data-tab="reminders" onclick="showTab(this)">Reminders</div>
+</div>
+
+<!-- ─── CONTENT ─── -->
+<div class="content">
+
+  <!-- ITINERARY -->
+  <div class="section active" id="tab-itinerary"></div>
+
+  <!-- HOTELS -->
+  <div class="section" id="tab-hotels">
+
+    <div class="hotel-card" id="hcard-zurich">
+      <div class="hotel-header">
+        <div class="hotel-name">Hotel Alexander</div>
+        <div id="hbadge-zurich"></div>
+      </div>
+      <div class="hotel-dates">Aug 25 – Aug 27 &nbsp;·&nbsp; 2 nights &nbsp;·&nbsp; Z&uuml;rich</div>
+      <div class="hotel-grid">
+        <div>
+          <div class="hotel-field-label">Address</div>
+          <div class="hotel-field-val">Niederdorfstrasse 40<br>8001 Z&uuml;rich</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Phone</div>
+          <div class="hotel-field-val">+41 (44) 251-8203</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Confirmation</div>
+          <div class="hotel-field-val">#91828811</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Breakfast &amp; Extras</div>
+          <div class="hotel-field-val">Included &nbsp;·&nbsp; Tourist tax CHF 3.50/person/night</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Check-in / Check-out</div>
+          <div class="hotel-field-val">Std 2–3 PM / 11 AM &nbsp;·&nbsp; Ask about early check-in after overnight flight</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Location</div>
+          <div class="hotel-field-val">Oldtown (Niederdorf) &nbsp;·&nbsp; ~5 min walk from Zurich HB or tram 4 to Central</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card" id="hcard-interlaken">
+      <div class="hotel-header">
+        <div class="hotel-name">Hotel Bernerhof</div>
+        <div id="hbadge-interlaken"></div>
+      </div>
+      <div class="hotel-dates">Aug 27 – Aug 31 &nbsp;·&nbsp; 4 nights &nbsp;·&nbsp; Interlaken</div>
+      <div class="hotel-grid">
+        <div>
+          <div class="hotel-field-label">Address</div>
+          <div class="hotel-field-val">Bahnhofstrasse 16<br>3800 Interlaken</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Phone</div>
+          <div class="hotel-field-val">+41 (33) 826-7676</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Confirmation</div>
+          <div class="hotel-field-val">#030698bbf6cd0baf</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Breakfast &amp; Extras</div>
+          <div class="hotel-field-val">Included &nbsp;·&nbsp; Tourist tax CHF 3.50/person/night</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Check-in / Check-out</div>
+          <div class="hotel-field-val">Std 3 PM / 11 AM &nbsp;·&nbsp; Luggage storage available</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Location</div>
+          <div class="hotel-field-val">~30 sec walk from Interlaken Ost station &nbsp;·&nbsp; Ideal for day trips</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card" id="hcard-lucerne">
+      <div class="hotel-header">
+        <div class="hotel-name">Hotel Royal Lucerne</div>
+        <div id="hbadge-lucerne"></div>
+      </div>
+      <div class="hotel-dates">Aug 31 – Sep 3 &nbsp;·&nbsp; 3 nights &nbsp;·&nbsp; Lucerne</div>
+      <div class="hotel-grid">
+        <div>
+          <div class="hotel-field-label">Address</div>
+          <div class="hotel-field-val">Rigistrasse 22<br>6006 Lucerne</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Phone</div>
+          <div class="hotel-field-val">+41 (41) 941-9464</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Confirmation</div>
+          <div class="hotel-field-val">#810097302380</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Breakfast &amp; Extras</div>
+          <div class="hotel-field-val">Room only (no breakfast) &nbsp;·&nbsp; CHF 45.90 taxes payable at check-in</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Check-in / Check-out</div>
+          <div class="hotel-field-val">Std 3 PM / By 8 AM on Sep 3 (early departure day)</div>
+        </div>
+        <div>
+          <div class="hotel-field-label">Location</div>
+          <div class="hotel-field-val">~5–10 min walk SE from Lucerne HB &nbsp;·&nbsp; Near Chapel Bridge</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-hotels -->
+
+  <!-- FLIGHTS -->
+  <div class="section" id="tab-flights">
+
+    <div class="flight-card">
+      <div class="flight-top">
+        <div class="flight-num">Air Canada AC 880 &nbsp;&mdash;&nbsp; Outbound</div>
+        <div class="f-badge upcoming" id="f1badge">Upcoming</div>
+      </div>
+      <div class="flight-route">
+        <div class="airport">
+          <div class="iata">YYZ</div>
+          <div class="airport-city">Toronto Pearson</div>
+        </div>
+        <div class="flight-line">
+          <div class="f-duration">~8h 50m</div>
+          <div class="f-line-bar"></div>
+        </div>
+        <div class="airport right">
+          <div class="iata">ZRH</div>
+          <div class="airport-city">Z&uuml;rich</div>
+        </div>
+      </div>
+      <div class="flight-times">
+        <div class="f-time-block">
+          <div class="f-time-label">Departs</div>
+          <div class="f-time">20:15</div>
+          <div class="f-date">Monday, Aug 24, 2026</div>
+        </div>
+        <div class="f-time-block right">
+          <div class="f-time-label">Arrives</div>
+          <div class="f-time">10:05</div>
+          <div class="f-date">Tuesday, Aug 25, 2026</div>
+        </div>
+      </div>
+      <div class="flight-details">
+        <div class="fd"><div class="fd-label">Aircraft</div><div class="fd-val">Boeing 777-200LR</div></div>
+        <div class="fd"><div class="fd-label">Seats</div><div class="fd-val">19H &nbsp;/&nbsp; 19J &nbsp;/&nbsp; 19K</div></div>
+        <div class="fd"><div class="fd-label">Booking ref</div><div class="fd-val">CYEDU3</div></div>
+        <div class="fd"><div class="fd-label">Ticket type</div><div class="fd-val">Economy Flex</div></div>
+        <div class="fd"><div class="fd-label">Cancellation fee</div><div class="fd-val">CAD $300 / person</div></div>
+        <div class="fd"><div class="fd-label">Total cost</div><div class="fd-val">CAD $4,941.96</div></div>
+      </div>
+    </div>
+
+    <div class="flight-card">
+      <div class="flight-top">
+        <div class="flight-num">Air Canada AC 881 &nbsp;&mdash;&nbsp; Return</div>
+        <div class="f-badge upcoming" id="f2badge">Upcoming</div>
+      </div>
+      <div class="flight-route">
+        <div class="airport">
+          <div class="iata">ZRH</div>
+          <div class="airport-city">Z&uuml;rich</div>
+        </div>
+        <div class="flight-line">
+          <div class="f-duration">~9h 50m</div>
+          <div class="f-line-bar"></div>
+        </div>
+        <div class="airport right">
+          <div class="iata">YYZ</div>
+          <div class="airport-city">Toronto Pearson</div>
+        </div>
+      </div>
+      <div class="flight-times">
+        <div class="f-time-block">
+          <div class="f-time-label">Departs</div>
+          <div class="f-time">13:25</div>
+          <div class="f-date">Thursday, Sep 3, 2026</div>
+        </div>
+        <div class="f-time-block right">
+          <div class="f-time-label">Arrives</div>
+          <div class="f-time">16:15</div>
+          <div class="f-date">Thursday, Sep 3, 2026</div>
+        </div>
+      </div>
+      <div class="flight-details">
+        <div class="fd"><div class="fd-label">Booking ref</div><div class="fd-val">CYEDU3</div></div>
+        <div class="fd"><div class="fd-label">Ticket type</div><div class="fd-val">Economy Flex</div></div>
+        <div class="fd"><div class="fd-label">Cancellation fee</div><div class="fd-val">CAD $300 / person</div></div>
+        <div class="fd"><div class="fd-label">Get to airport</div><div class="fd-val">Train Lucerne HB &rarr; ZRH &nbsp;·&nbsp; Depart ~8:30 AM &nbsp;·&nbsp; Arrive ~10:00–10:30 AM</div></div>
+        <div class="fd"><div class="fd-label">Security</div><div class="fd-val">Allow 45–60 min &nbsp;·&nbsp; Check-in deadline ~12:25 PM</div></div>
+      </div>
+    </div>
+
+  </div><!-- /tab-flights -->
+
+  <!-- REMINDERS -->
+  <div class="section" id="tab-reminders">
+
+    <div class="rem-section-title">Critical — do now</div>
+    <div class="rem-item"><div class="rem-dot critical"></div><div><div class="rem-text">Notify bank &amp; credit cards of travel dates</div><div class="rem-note">Visa, Mastercard, any other cards &nbsp;·&nbsp; Travel window: Aug 24 – Sep 3</div></div></div>
+    <div class="rem-item"><div class="rem-dot critical"></div><div><div class="rem-text">Purchase travel insurance</div><div class="rem-note">Trip cancellation, medical emergency, evacuation, lost baggage</div></div></div>
+
+    <div class="rem-section-title">High priority — book these</div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Order Swiss Travel Pass — 3&times; 8-day consecutive, 2nd class</div><div class="rem-note">CHF 439 p.p. (~CAD $660) &nbsp;·&nbsp; Buy at SBB.ch or activate at ZRH airport Aug 25</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Book excursions — email Violet at Maritime Travel</div><div class="rem-note">Jungfraujoch, Grindelwald First cable car, Viator excursion</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Book ZRH airport &rarr; Hotel Alexander transfer (Aug 25)</div><div class="rem-note">Coordinate with Violet (Maritime Travel)</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Book Toronto Airport limo</div><div class="rem-note">Outbound: evening Aug 24 &nbsp;·&nbsp; Return: Sep 3, arrive YYZ ~4:15 PM</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Arrange plant &amp; mail care — Nancy or Tom</div><div class="rem-note">Dates: Aug 24 – Sep 3 &nbsp;·&nbsp; Water plants, collect mail, check house</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Stop Toronto Star delivery</div><div class="rem-note">Pause 2–3 days before Aug 24 departure</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Exchange Swiss Francs (CHF) &amp; Euros (EUR)</div><div class="rem-note">CHF 500–800 cash for daily spending &nbsp;·&nbsp; Small EUR reserve &nbsp;·&nbsp; TD or CIBC</div></div></div>
+    <div class="rem-item"><div class="rem-dot high"></div><div><div class="rem-text">Purchase Rick Steves carry-on bag</div><div class="rem-note">22&rdquo; wheeled, fits European overhead &nbsp;·&nbsp; ricksteves.com or travel gear retailer</div></div></div>
+
+    <div class="rem-section-title">Medium priority</div>
+    <div class="rem-item"><div class="rem-dot medium"></div><div><div class="rem-text">Arrange international SIM / roaming for 3 phones</div><div class="rem-note">Swiss eSIM (Salt/Sunrise ~CHF 20–30) vs. Rogers $12/day &nbsp;·&nbsp; See ADR-002 in Decisions folder</div></div></div>
+    <div class="rem-item"><div class="rem-dot medium"></div><div><div class="rem-text">Download offline maps &amp; travel apps</div><div class="rem-note">Google Maps offline (Zurich, Interlaken, Lucerne), SBB app, weather app, Komoot for hiking</div></div></div>
+    <div class="rem-item"><div class="rem-dot medium"></div><div><div class="rem-text">Doctor visit re: asthma &mdash; book by mid-July</div><div class="rem-note">Review inhaler prescriptions &nbsp;·&nbsp; Ask about Jungfraujoch altitude (3,454 m — cold, dry air)</div></div></div>
+    <div class="rem-item"><div class="rem-dot medium"></div><div><div class="rem-text">Confirm all reservations ~6 weeks before Aug 25</div><div class="rem-note">Hotels, flights AC 880/881, Swiss Travel Pass, excursions</div></div></div>
+    <div class="rem-item"><div class="rem-dot medium"></div><div><div class="rem-text">Set up budget tracking for trip spending</div><div class="rem-note">~CAD $12–14k total budget &nbsp;·&nbsp; Splitwise or spreadsheet for shared expenses</div></div></div>
+
+  </div><!-- /tab-reminders -->
+
+</div><!-- /content -->
+
+<script>
+// ── COUNTDOWN ──────────────────────────────────────────────
+const DEPARTURE = new Date('2026-08-24T20:15:00-04:00');
+
+function pad(n) { return String(n).padStart(2,'0'); }
+
+function tick() {
+  const diff = DEPARTURE - Date.now();
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML = '<div class="cd-done">&#10004; Bon voyage!</div>';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = pad(d);
+  document.getElementById('cd-h').textContent = pad(h);
+  document.getElementById('cd-m').textContent = pad(m);
+  document.getElementById('cd-s').textContent = pad(s);
+}
+tick();
+setInterval(tick, 1000);
+
+// ── TABS ───────────────────────────────────────────────────
+function showTab(el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + el.dataset.tab).classList.add('active');
+}
+
+// ── ITINERARY DATA ─────────────────────────────────────────
+const DAYS = [
+  {
+    date: '2026-08-24', num: '0', type: 'depart',
+    title: 'Departure — Toronto',
+    theme: 'Trans-Atlantic overnight flight to Zürich',
+    highlights: 'AC 880 departs YYZ 20:15 &middot; Seats 19H, 19J, 19K &middot; Boeing 777-200LR &middot; Overnight flight',
+    logistics: 'Evening departure &middot; Arrive Zürich Aug 25 at 10:05 AM',
+    dinner: null,
+    tags: []
+  },
+  {
+    date: '2026-08-25', num: '1', type: 'arrival',
+    title: 'Arrive Zürich',
+    theme: 'Arrival day &mdash; rest, light orientation',
+    highlights: 'Arrive ZRH 10:05 AM &middot; Activate Swiss Travel Pass at airport &middot; Hotel Alexander check-in (2&ndash;3 PM) &middot; Oldtown walk along Limmatquai &middot; Wasserkirche &middot; St. Peter Church',
+    logistics: 'Train ZRH &rarr; Zurich HB (~10 min) &middot; Luggage storage if room not ready &middot; Hotel: Niederdorfstrasse 40',
+    dinner: 'Zunfthaus zur Waag &mdash; Zürcher Geschnetzeltes (sliced veal) + Rösti',
+    tags: [{ label: 'Pass covered: airport &rarr; ZRH HB', cls: 'tag-pass' }]
+  },
+  {
+    date: '2026-08-26', num: '2', type: 'normal',
+    title: 'Zürich Culture &amp; Lake',
+    theme: 'Art, history, lakeside charm',
+    highlights: 'Kunsthaus Zürich (NOTE: closed Mondays &mdash; go to lake instead) &middot; Lake Zürich boat cruise from Bürkliplatz &middot; Lindenhof viewpoint &middot; Bahnhofstrasse',
+    logistics: 'Trams 6 or 7 from Hotel Alexander to Central &middot; Lake boats depart Bürkliplatz &middot; Sprüngli pastry shop near Paradeplatz',
+    dinner: 'Haus Hiltl (Sihlstrasse 28) &mdash; famous mushroom risotto &middot; Book: +41 44 227 70 00',
+    tags: [{ label: 'Lake boats: pass covered', cls: 'tag-pass' }]
+  },
+  {
+    date: '2026-08-27', num: '3', type: 'travel',
+    title: 'Zürich &rarr; Interlaken',
+    theme: 'Scenic rail through Bernese Oberland',
+    highlights: 'ZRH HB &rarr; Bern &rarr; Interlaken Ost (~2 hrs, 1 transfer) &middot; Request window seat &middot; Pack Coop/Migros picnic at Zurich HB &middot; Hotel Bernerhof is 30 sec from Interlaken Ost',
+    logistics: 'Check out Hotel Alexander by 11 AM &middot; Luggage storage available &middot; Std check-in 3 PM at Bernerhof',
+    dinner: 'Mercato (Hoheweg 56) &mdash; pasta with local pesto or lake trout &middot; Walk-ins OK',
+    tags: [{ label: 'Entire route: pass covered', cls: 'tag-pass' }]
+  },
+  {
+    date: '2026-08-28', num: '4', type: 'normal',
+    title: 'Grindelwald Day Trip',
+    theme: 'First Alpine experience &mdash; Eiger views',
+    highlights: 'Interlaken Ost &rarr; Grindelwald (35 min) &middot; Grindelwald First cable car (35 min up) &middot; First Cliff Viewpoint &middot; Marienwald trail to waterfall (optional, 30 min)',
+    logistics: 'Sit right (starboard) inbound for Eiger views &middot; Left side on return &middot; Weather check: if cloudy, Grindelwald town + museum instead',
+    dinner: 'Wirtschaft Wildmann (2 min from hotel) &mdash; Cordon bleu + Rösti &middot; or Hotel Bernerhof restaurant',
+    tags: [
+      { label: 'Train: pass covered', cls: 'tag-pass' },
+      { label: 'First cable car: CHF 48 surcharge', cls: 'tag-surcharge' }
+    ]
+  },
+  {
+    date: '2026-08-29', num: '5', type: 'normal',
+    title: 'Jungfraujoch / Kleine Scheidegg',
+    theme: 'Weather-dependent decision &mdash; plan both',
+    highlights: 'Clear: Jungfraujoch (3,454 m) &middot; Aletsch Glacier walk &middot; Ice Palace &middot; Sphinx Observatory &middot; Allow full day &middot; Depart 8:30 AM<br>Cloudy: Kleine Scheidegg only (often above clouds, no surcharge, 90% of the experience)',
+    logistics: 'Route: Interlaken &rarr; Lauterbrunnen &rarr; Kleine Scheidegg &rarr; Jungfraujoch &middot; Pack layers, sunscreen, water bottle &middot; Altitude = normal breathlessness',
+    dinner: 'Taverna Interlaken (Höheweg 37) &mdash; Carbonara or lake trout risotto &middot; Book ahead',
+    tags: [
+      { label: 'Trains to Kleine Scheidegg: covered', cls: 'tag-pass' },
+      { label: 'Jungfraujoch: CHF 45–80 surcharge', cls: 'tag-surcharge' }
+    ]
+  },
+  {
+    date: '2026-08-30', num: '6', type: 'normal',
+    title: 'Lauterbrunnen &amp; Lake Brienz',
+    theme: 'Waterfalls, boat cruise &mdash; relaxed day',
+    highlights: 'Interlaken &rarr; Lauterbrunnen (21 min) &middot; Staubbach Falls (ribbon waterfall, free) &middot; Trümmelbach Falls inside mountain (CHF 12) &middot; Lake Brienz boat cruise (75 min, Interlaken &rarr; Brienz)',
+    logistics: 'Sit right for waterfall views &middot; Morning light best for photos &middot; Boat departs ~2&ndash;3 PM &middot; Hotel 30 sec from Ost station',
+    dinner: 'Beatus Stuberl (Höheweg 137) &mdash; Fondue or rack of lamb &middot; Book ahead: intimate spot',
+    tags: [
+      { label: 'All trains + Lake Brienz: covered', cls: 'tag-pass' }
+    ]
+  },
+  {
+    date: '2026-08-31', num: '7', type: 'travel',
+    title: 'Interlaken &rarr; Lucerne',
+    theme: 'Luzern-Interlaken Express &mdash; scenic mountain rail',
+    highlights: 'Interlaken Ost &rarr; Lucerne direct (~1h 50m) &middot; Lake Brienz, Brünig Pass &middot; Sit right for lake views &middot; Chapel Bridge (Kappelbrücke) sunset walk &mdash; 10 min from hotel',
+    logistics: 'Check out Hotel Bernerhof by 11 AM &middot; Depart ~12:30 PM &middot; Hotel Royal Lucerne: 5&ndash;10 min walk SE from Lucerne HB',
+    dinner: 'Rathaus Brauerei (Unter den Egg 2) &mdash; braised beef or pike-perch &middot; Book ahead',
+    tags: [{ label: 'Entire route: covered', cls: 'tag-pass' }]
+  },
+  {
+    date: '2026-09-01', num: '8', type: 'normal',
+    title: 'Lucerne Old Town &amp; Lake',
+    theme: 'History, medieval charm, lakeside walk',
+    highlights: 'Chapel Bridge self-guided walk &middot; Water Tower &middot; Weinmarkt Square &middot; Spreuerbrücke (Mill Bridge) &middot; Lake Lucerne boat cruise (1 hr, 3 PM) &middot; Sunday = quiet, great for photos',
+    logistics: 'Swiss Museum of Transport (CHF 32) or Richard Wagner Museum (CHF 15) in afternoon &mdash; pick one &middot; Museums not pass-covered',
+    dinner: 'Balances (Weinmarkt) &mdash; lake trout or local beef sirloin &middot; Book: +41 41 418 28 28',
+    tags: [
+      { label: 'Lake Lucerne boats: covered', cls: 'tag-pass' },
+      { label: 'Museums: not covered', cls: 'tag-note' }
+    ]
+  },
+  {
+    date: '2026-09-02', num: '9', type: 'normal',
+    title: 'Mount Rigi Day Trip',
+    theme: '"Queen of Mountains" &mdash; easy Alpine peak',
+    highlights: 'Lucerne &rarr; Arth-Goldau &rarr; Rigi Kulm (1,798 m) via Rigibahn cogwheel (45 min) &middot; Rigi Scheidegg viewpoint walk (1 hr) &middot; Felsenweg trail descent or all the way down by train',
+    logistics: 'Depart 8 AM &middot; ~30 min from Lucerne by train &middot; Easy-moderate difficulty &middot; Summit views 360° &middot; Both sides have dramatic vistas on ascent',
+    dinner: 'Seeburg (Unter den Egg 8) &mdash; Fondue or duck breast with cherry sauce &middot; Book: +41 41 410 47 47',
+    tags: [{ label: 'All trains incl. Rigibahn: covered', cls: 'tag-pass' }]
+  },
+  {
+    date: '2026-09-03', num: '10', type: 'depart',
+    title: 'Departure &mdash; Lucerne &rarr; Home',
+    theme: 'Final morning, train to Zürich Airport',
+    highlights: 'Sunrise walk to Chapel Bridge (5 min, 7:45 AM) &middot; Train Lucerne HB &rarr; Zurich HB (depart 8:30 AM, ~55 min) &middot; ZRH Airport via train from HB (~10 min) &middot; AC 881 departs 13:25',
+    logistics: 'Check out 7:30&ndash;8:00 AM &middot; Arrive ZRH 10:00&ndash;10:30 AM &middot; Allow 45&ndash;60 min for security &middot; Check-in deadline ~12:25 PM',
+    dinner: null,
+    tags: [{ label: 'Lucerne → ZRH Airport: covered', cls: 'tag-pass' }]
+  }
+];
+
+function renderItinerary() {
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const tripStart = new Date('2026-08-24');
+  const tripEnd   = new Date('2026-09-04');
+  const container = document.getElementById('tab-itinerary');
+  let todayCard = null;
+
+  DAYS.forEach(day => {
+    const isPast  = day.date < todayStr;
+    const isToday = day.date === todayStr;
+    const numType = isToday ? 'today' : day.type;
+
+    const card = document.createElement('div');
+    card.className = 'day-card' + (isPast ? ' past' : '') + (isToday ? ' today' : '');
+
+    const dateObj = new Date(day.date + 'T12:00:00');
+    const dateLabel = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+
+    const tagsHTML = day.tags.length
+      ? '<div class="tag-row">' + day.tags.map(t => `<span class="tag ${t.cls}">${t.label}</span>`).join('') + '</div>'
+      : '';
+
+    const dinnerHTML = day.dinner
+      ? `<div class="day-field" style="margin-top:10px"><div class="day-field-label">Dinner</div><div class="day-field-val">${day.dinner}</div></div>`
+      : '';
+
+    card.innerHTML = `
+      <div class="day-card-head">
+        <div class="day-num type-${numType}">${day.num}</div>
+        <div class="day-head-text">
+          <div class="day-title-row">
+            <span class="day-title">${day.title}</span>
+            ${isToday ? '<span class="today-chip">TODAY</span>' : ''}
+          </div>
+          <div class="day-meta">${dateLabel} &nbsp;&middot;&nbsp; ${day.theme}</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div>
+          <div class="day-field">
+            <div class="day-field-label">Highlights</div>
+            <div class="day-field-val">${day.highlights}</div>
+          </div>
+        </div>
+        <div>
+          <div class="day-field">
+            <div class="day-field-label">Logistics</div>
+            <div class="day-field-val">${day.logistics}</div>
+          </div>
+          ${dinnerHTML}
+          ${tagsHTML}
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+    if (isToday) todayCard = card;
+  });
+
+  if (todayCard) {
+    setTimeout(() => todayCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+  }
+}
+
+renderItinerary();
+
+// ── HOTEL CURRENT STAY ─────────────────────────────────────
+(function() {
+  const todayStr = new Date().toISOString().slice(0,10);
+  const stays = [
+    { start:'2026-08-25', end:'2026-08-27', id:'zurich' },
+    { start:'2026-08-27', end:'2026-08-31', id:'interlaken' },
+    { start:'2026-08-31', end:'2026-09-03', id:'lucerne' }
+  ];
+  stays.forEach(s => {
+    if (todayStr >= s.start && todayStr < s.end) {
+      document.getElementById('hcard-' + s.id).classList.add('current-stay');
+      document.getElementById('hbadge-' + s.id).innerHTML = '<span class="current-badge">Current stay</span>';
+    }
+  });
+})();
+
+// ── FLIGHT STATUS ──────────────────────────────────────────
+(function() {
+  const now = Date.now();
+  if (now > new Date('2026-08-25T10:05:00+02:00').getTime()) {
+    const b = document.getElementById('f1badge');
+    b.textContent = 'Completed'; b.className = 'f-badge completed';
+  }
+  if (now > new Date('2026-09-03T16:15:00-04:00').getTime()) {
+    const b = document.getElementById('f2badge');
+    b.textContent = 'Completed'; b.className = 'f-badge completed';
+  }
+})();
+</script>
+</body>
+</html>
