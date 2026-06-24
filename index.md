@@ -19,6 +19,9 @@ ai_blogs:
   - name: Anthropic News
     url: https://www.anthropic.com/news
     note: Research and product posts
+  - name: Anthropic RED Teaming
+    url: https://red.anthropic.com/
+    note: Safety evaluations, system cards, and red-team insights
   - name: Claude Blog
     url: https://claude.com/blog
     note: Anthropic Claude product announcements

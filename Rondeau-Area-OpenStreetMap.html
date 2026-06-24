@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rondeau Area OpenStreetMap</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQxC+f0f9G5oSsF3LgR2dq0xQy9E2iU=" crossorigin="">
+  <style>
+    /* Critical Leaflet layout CSS. Kept inline so local file:// viewing still works if the CDN stylesheet is blocked. */
+    .leaflet-pane,
+    .leaflet-tile,
+    .leaflet-marker-icon,
+    .leaflet-marker-shadow,
+    .leaflet-tile-container,
+    .leaflet-pane > svg,
+    .leaflet-pane > canvas,
+    .leaflet-zoom-box,
+    .leaflet-image-layer,
+    .leaflet-layer {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .leaflet-container {
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .leaflet-tile,
+    .leaflet-marker-icon,
+    .leaflet-marker-shadow {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .leaflet-tile::selection {
+      background: transparent;
+    }
+
+    .leaflet-safari .leaflet-tile {
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .leaflet-zoom-box {
+      width: 0;
+      height: 0;
+      box-sizing: border-box;
+      z-index: 800;
+    }
+
+    .leaflet-pane {
+      z-index: 400;
+    }
+
+    .leaflet-tile-pane {
+      z-index: 200;
+    }
+
+    .leaflet-overlay-pane {
+      z-index: 400;
+    }
+
+    .leaflet-shadow-pane {
+      z-index: 500;
+    }
+
+    .leaflet-marker-pane {
+      z-index: 600;
+    }
+
+    .leaflet-tooltip-pane {
+      z-index: 650;
+    }
+
+    .leaflet-popup-pane {
+      z-index: 700;
+    }
+
+    .leaflet-map-pane canvas {
+      z-index: 100;
+    }
+
+    .leaflet-map-pane svg {
+      z-index: 200;
+    }
+
+    .leaflet-control {
+      position: relative;
+      z-index: 800;
+      pointer-events: auto;
+    }
+
+    .leaflet-top,
+    .leaflet-bottom {
+      position: absolute;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    .leaflet-top {
+      top: 0;
+    }
+
+    .leaflet-right {
+      right: 0;
+    }
+
+    .leaflet-bottom {
+      bottom: 0;
+    }
+
+    .leaflet-left {
+      left: 0;
+    }
+
+    .leaflet-control {
+      float: left;
+      clear: both;
+    }
+
+    .leaflet-right .leaflet-control {
+      float: right;
+    }
+
+    .leaflet-top .leaflet-control {
+      margin-top: 10px;
+    }
+
+    .leaflet-bottom .leaflet-control {
+      margin-bottom: 10px;
+    }
+
+    .leaflet-left .leaflet-control {
+      margin-left: 10px;
+    }
+
+    .leaflet-right .leaflet-control {
+      margin-right: 10px;
+    }
+
+    .leaflet-control-zoom a {
+      display: block;
+      width: 30px;
+      height: 30px;
+      border-bottom: 1px solid #ccc;
+      background: #fff;
+      color: #111;
+      font: 700 20px/30px Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .leaflet-control-zoom a:last-child {
+      border-bottom: 0;
+    }
+
+    .leaflet-control-attribution {
+      background: rgba(255, 255, 255, .82);
+      margin: 0;
+      padding: 0 5px;
+      color: #333;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .leaflet-popup {
+      position: absolute;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, .28);
+      padding: 1px;
+      text-align: left;
+    }
+
+    .leaflet-popup-content {
+      margin: 13px 19px;
+      min-width: 190px;
+    }
+
+    .leaflet-popup-tip-container {
+      position: absolute;
+      left: 50%;
+      width: 40px;
+      height: 20px;
+      margin-left: -20px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .leaflet-popup-tip {
+      width: 17px;
+      height: 17px;
+      margin: -10px auto 0;
+      background: #fff;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, .28);
+      transform: rotate(45deg);
+    }
+
+    .leaflet-popup-close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+      background: transparent;
+      color: #757575;
+      font: 16px/24px Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      width: 24px;
+      height: 24px;
+    }
+
+    .leaflet-tooltip {
+      position: absolute;
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+      color: #222;
+      padding: 6px;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    :root {
+      color-scheme: light;
+      --ink: #20201d;
+      --muted: #635f57;
+      --paper: #f8f4ea;
+      --panel: rgba(255, 255, 255, 0.94);
+      --line: #d8ccb8;
+      --base: #24507a;
+      --must: #b23b35;
+      --local: #2e7653;
+      --optional: #6d5aa8;
+      --island: #c0772d;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(300px, 390px) 1fr;
+      height: 100%;
+      min-height: 720px;
+    }
+
+    aside {
+      border-right: 1px solid var(--line);
+      background: var(--panel);
+      overflow: auto;
+      padding: 22px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 8px 0 0;
+    }
+
+    .meta {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    button {
+      border: 1px solid #bfb29d;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font: 700 13px Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #f1eadc;
+    }
+
+    .legend {
+      display: grid;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #221f1b;
+      box-sizing: border-box;
+      flex: 0 0 14px;
+    }
+
+    .dot.base { background: var(--base); }
+    .dot.must { background: var(--must); }
+    .dot.local { background: var(--local); }
+    .dot.optional { background: var(--optional); }
+    .dot.island { background: var(--island); }
+
+    .stop-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .stop {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf1;
+      padding: 10px;
+    }
+
+    .stop strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+
+    .stop span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    #map {
+      height: 100%;
+      min-height: 720px;
+    }
+
+    .marker {
+      align-items: center;
+      display: flex;
+      width: 26px;
+      height: 26px;
+      margin-left: -13px;
+      margin-top: -13px;
+      border: 2px solid #231f19;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .28);
+      box-sizing: border-box;
+      color: #fff;
+      font: 700 12px Arial, sans-serif;
+      justify-content: center;
+    }
+
+    .marker.base { background: var(--base); }
+    .marker.must { background: var(--must); }
+    .marker.local { background: var(--local); }
+    .marker.optional { background: var(--optional); }
+    .marker.island { background: var(--island); }
+
+    .zone-label {
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid #c7bba7;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .14);
+      color: #2d2923;
+      font: 700 13px Arial, sans-serif;
+      padding: 5px 7px;
+      white-space: nowrap;
+    }
+
+    .popup-title {
+      margin: 0 0 4px;
+      font: 700 15px Arial, sans-serif;
+      color: var(--ink);
+    }
+
+    .popup-note {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .popup-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .popup-links a {
+      color: #165d7a;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .leaflet-container {
+      background: #d8e7eb;
+    }
+
+    @media (max-width: 820px) {
+      .shell {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 68vh;
+        min-height: 0;
+      }
+
+      aside {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      #map {
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <aside>
+      <h1>Rondeau Area OSM Map</h1>
+      <p class="meta">OpenStreetMap-based excursion map for the Jun 26-Jul 2, 2026 Rondeau camping trip.</p>
+
+      <div class="controls">
+        <button id="fitCore" type="button">Core Plan</button>
+        <button id="fitAll" type="button">Fit All</button>
+        <button id="fitMainland" type="button">Mainland</button>
+        <button id="fitIsland" type="button">Pelee Island</button>
+      </div>
+
+      <h2>Legend</h2>
+      <div class="legend">
+        <div class="legend-row"><span class="dot base"></span>Base camp area</div>
+        <div class="legend-row"><span class="dot must"></span>Must-see / major outing</div>
+        <div class="legend-row"><span class="dot local"></span>Easy local half-day</div>
+        <div class="legend-row"><span class="dot optional"></span>Optional stop / fallback</div>
+        <div class="legend-row"><span class="dot island"></span>Pelee Island stop</div>
+      </div>
+
+      <h2>How To Use It</h2>
+      <ul>
+        <li>Use the shaded areas as trip clusters rather than turn-by-turn routes.</li>
+        <li>Use the blue dashed route as the ferry leg to Pelee Island.</li>
+        <li>Keep Point Pelee and Pelee Island as separate outings.</li>
+        <li>Click any marker for notes and an OpenStreetMap link.</li>
+      </ul>
+
+      <h2>Mapped Stops</h2>
+      <div class="stop-list" id="stopList"></div>
+
+      <h2>Coordinate Notes</h2>
+      <p>Mainland markers and the resolved island business markers came from OpenStreetMap Nominatim. West Dock, Lighthouse Point, and Fish Point are approximate manual placements on the OSM base map because those names did not resolve cleanly in Nominatim. Shaded clusters are planning areas, not route geometry.</p>
+    </aside>
+    <section id="map" aria-label="OpenStreetMap of Rondeau excursion area"></section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const base = [42.2892058, -81.8691696];
+
+    const places = [
+      {
+        id: "rondeau",
+        name: "Rondeau Provincial Park",
+        type: "base",
+        group: "mainland",
+        coords: [42.2892058, -81.8691696],
+        source: "OSM Nominatim way 1064131749",
+        note: "Base park area for North Campground site 242. Use the park map for exact campground/site navigation."
+      },
+      {
+        id: "erieau",
+        name: "Erieau",
+        type: "local",
+        group: "mainland",
+        coords: [42.2606932, -81.9173021],
+        source: "OSM Nominatim node 12710233599",
+        note: "Closest easy half-day: beach town, marina, pier walk, lunch or ice cream."
+      },
+      {
+        id: "wheatley",
+        name: "Wheatley",
+        type: "optional",
+        group: "mainland",
+        coords: [42.0950707, -82.4630203],
+        source: "OSM Nominatim node 266831520",
+        note: "Small harbour-town stop or meal/supply fallback on the way toward Leamington."
+      },
+      {
+        id: "leamingtonTerminal",
+        name: "Leamington Ferry Terminal",
+        type: "must",
+        group: "mainland",
+        coords: [42.0262148, -82.6023579],
+        source: "OSM Nominatim node 6734176605",
+        note: "Relevant ferry terminal for the planned Pelee Island day from Leamington."
+      },
+      {
+        id: "seacliff",
+        name: "Seacliff Park",
+        type: "optional",
+        group: "mainland",
+        coords: [42.0314887, -82.6048234],
+        source: "OSM Nominatim way 205705492",
+        note: "Leamington waterfront stop that pairs well with dinner or ferry timing."
+      },
+      {
+        id: "hillman",
+        name: "Hillman Marsh Conservation Area",
+        type: "optional",
+        group: "mainland",
+        coords: [42.0390034, -82.5032898],
+        source: "OSM Nominatim way 826327324",
+        note: "Birding / marsh add-on near Leamington and Point Pelee."
+      },
+      {
+        id: "pointPeleeVisitor",
+        name: "Point Pelee Visitor Centre",
+        type: "must",
+        group: "mainland",
+        coords: [41.9316216, -82.5130337],
+        source: "OSM Nominatim way 175345618",
+        note: "Core Point Pelee stop for Visitor Centre, Marsh Boardwalk access, trails, and shuttle orientation."
+      },
+      {
+        id: "pointPeleeTip",
+        name: "Point Pelee Tip Tower",
+        type: "must",
+        group: "mainland",
+        coords: [41.9139661, -82.5100772],
+        source: "OSM Nominatim way 1005423604",
+        note: "Southernmost mainland Canada experience. Conditions at the actual sand tip can shift."
+      },
+      {
+        id: "peleeWestDock",
+        name: "Pelee Island West Dock",
+        type: "island",
+        group: "island",
+        coords: [41.7629, -82.6925],
+        source: "Approximate manual placement on OSM base",
+        note: "Approximate ferry arrival area. Confirm terminal position on the ferry operator map before sailing."
+      },
+      {
+        id: "heritageCentre",
+        name: "Pelee Island Heritage Centre",
+        type: "island",
+        group: "island",
+        coords: [41.7629230, -82.6887294],
+        source: "OSM Nominatim way 1080435784",
+        note: "Good first island stop if hours fit; close to the west-side arrival area."
+      },
+      {
+        id: "winery",
+        name: "Pelee Island Winery Pavilion",
+        type: "island",
+        group: "island",
+        coords: [41.7545980, -82.6865638],
+        source: "OSM Nominatim way 894724851",
+        note: "Food/winery stop if open and if the ferry window leaves enough time."
+      },
+      {
+        id: "lighthousePoint",
+        name: "Lighthouse Point",
+        type: "island",
+        group: "island",
+        coords: [41.8332, -82.6471],
+        source: "Approximate manual placement on OSM base",
+        note: "Northern nature endpoint for boardwalk, beach, and lighthouse area."
+      },
+      {
+        id: "fishPoint",
+        name: "Fish Point",
+        type: "island",
+        group: "island",
+        coords: [41.7264, -82.6822],
+        source: "Approximate manual placement on OSM base",
+        note: "Southern nature endpoint. Better with a vehicle or more island time."
+      },
+      {
+        id: "chatham",
+        name: "Chatham",
+        type: "optional",
+        group: "mainland",
+        coords: [42.4057219, -82.1853837],
+        source: "OSM Nominatim way 1442581529",
+        note: "Rainy-day or larger-town fallback for supplies, food, and indoor options."
+      }
+    ];
+
+    const map = L.map("map", {
+      zoomControl: true,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const routeLayer = L.layerGroup().addTo(map);
+    const zoneLayer = L.layerGroup().addTo(map);
+    const markerLayer = L.layerGroup().addTo(map);
+
+    const typeLabels = {
+      base: "Base camp area",
+      must: "Must-see / major outing",
+      local: "Easy local half-day",
+      optional: "Optional stop / fallback",
+      island: "Pelee Island stop"
+    };
+
+    function osmLink(place) {
+      const lat = place.coords[0].toFixed(6);
+      const lon = place.coords[1].toFixed(6);
+      return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=14/${lat}/${lon}`;
+    }
+
+    function directionsLink(from, to) {
+      return `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${from.coords[0]},${from.coords[1]};${to.coords[0]},${to.coords[1]}`;
+    }
+
+    function markerIcon(type, label) {
+      return L.divIcon({
+        className: "",
+        html: `<div class="marker ${type}">${label}</div>`,
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+        popupAnchor: [0, -13]
+      });
+    }
+
+    function get(id) {
+      return places.find((place) => place.id === id);
+    }
+
+    function addTripZone(label, center, radius, color) {
+      L.circle(center, {
+        radius,
+        color,
+        weight: 2,
+        opacity: 0.8,
+        fillColor: color,
+        fillOpacity: 0.12
+      }).addTo(zoneLayer);
+
+      L.marker(center, {
+        icon: L.divIcon({
+          className: "",
+          html: `<div class="zone-label">${label}</div>`,
+          iconSize: [0, 0],
+          iconAnchor: [-8, 34]
+        }),
+        interactive: false
+      }).addTo(zoneLayer);
+    }
+
+    addTripZone("Local Rondeau / Erieau", [42.276, -81.895], 6800, "#2e7653");
+    addTripZone("Leamington / Point Pelee", [41.985, -82.555], 15500, "#b23b35");
+    addTripZone("Pelee Island day", [41.778, -82.675], 9400, "#c0772d");
+    addTripZone("Chatham fallback", [42.4057219, -82.1853837], 5200, "#6d5aa8");
+
+    places.forEach((place, index) => {
+      const popup = `
+        <div>
+          <p class="popup-title">${place.name}</p>
+          <p class="popup-note">${place.note}</p>
+          <p class="popup-note"><strong>${typeLabels[place.type]}</strong><br>${place.source}</p>
+          <div class="popup-links">
+            <a href="${osmLink(place)}" target="_blank" rel="noreferrer">Open in OSM</a>
+            <a href="${directionsLink(get("rondeau"), place)}" target="_blank" rel="noreferrer">Directions from Rondeau</a>
+          </div>
+        </div>`;
+
+      L.marker(place.coords, { icon: markerIcon(place.type, index + 1), title: place.name })
+        .bindPopup(popup, { maxWidth: 300 })
+        .addTo(markerLayer);
+    });
+
+    L.polyline([
+      get("leamingtonTerminal").coords,
+      get("peleeWestDock").coords
+    ], {
+      color: "#23627c",
+      weight: 4,
+      opacity: 0.85,
+      dashArray: "8 10"
+    }).bindTooltip("Approximate Leamington to Pelee Island ferry leg").addTo(routeLayer);
+
+    const allBounds = L.latLngBounds(places.map((place) => place.coords));
+    const coreBounds = L.latLngBounds(places.filter((place) => place.id !== "chatham").map((place) => place.coords));
+    const mainlandBounds = L.latLngBounds(places.filter((place) => place.group === "mainland").map((place) => place.coords));
+    const islandBounds = L.latLngBounds(places.filter((place) => place.group === "island").map((place) => place.coords));
+
+    map.fitBounds(coreBounds.pad(0.12));
+
+    document.getElementById("fitCore").addEventListener("click", () => map.fitBounds(coreBounds.pad(0.12)));
+    document.getElementById("fitAll").addEventListener("click", () => map.fitBounds(allBounds.pad(0.12)));
+    document.getElementById("fitMainland").addEventListener("click", () => map.fitBounds(mainlandBounds.pad(0.16)));
+    document.getElementById("fitIsland").addEventListener("click", () => map.fitBounds(islandBounds.pad(0.24)));
+
+    const stopList = document.getElementById("stopList");
+    places.forEach((place) => {
+      const item = document.createElement("button");
+      item.className = "stop";
+      item.type = "button";
+      item.innerHTML = `<strong>${place.name}</strong><span>${place.note}</span>`;
+      item.addEventListener("click", () => {
+        map.setView(place.coords, place.group === "island" ? 12 : 11);
+      });
+      stopList.appendChild(item);
+    });
+  </script>
+</body>
+</html>
