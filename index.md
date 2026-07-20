@@ -92,17 +92,6 @@ ai_blogs:
     <a href="./2025-Nov-8.html">Read More -></a>
   </div>
 
-  <div class="showcase-card">
-    <h3>Rondeau Area OSM Map</h3>
-    <p>An interactive OpenStreetMap trip planner for the June-July 2026 Rondeau camping trip.</p>
-    <a href="{{ '/Rondeau-Area-OpenStreetMap.html' | relative_url }}">Open Map -></a>
-  </div>
-
-  <div class="showcase-card">
-    <h3>Switzerland 2026 Dashboard</h3>
-    <p>An interactive trip dashboard for itinerary, hotels, flights, and reminders.</p>
-    <a href="{{ '/switzerland-dashboard.html' | relative_url }}">Open Dashboard -></a>
-  </div>
 </div>
 
 ## 🧪 Latest Projects (March-May 2026)
