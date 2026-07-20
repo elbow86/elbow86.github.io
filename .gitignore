@@ -9,5 +9,6 @@ Gemfile.lock
 .env
 .vscode/
 Gemfile
+jekyll.log
 
 diagnosing/
