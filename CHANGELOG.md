@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+### Added - 2026-10-05
+- New blog post: `2026-Oct-05.md` (WSL Docker experiments and AI workflow notes)
+  - Docker Immich in WSL
+  - Docker NextCloud in WSL
+  - Mistral Vibe for subscription tracker feature ideas
+  - Karpathy ASD-STE100 rules analysis experiment
+
 ### Added - 2026-05-24
 - New blog post: `2026-May-24.md` (March Through May 2026 Projects)
   - Ralph Loop

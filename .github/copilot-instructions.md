@@ -1,106 +1,87 @@
 # Copilot Instructions for elbow86.github.io
 
-## Project Overview
+## Project overview
 
-Personal tech blog and portfolio built with **Jekyll 4.4.1** and hosted on **GitHub Pages**. This is a minimal setup with blog posts as root-level Markdown files and custom inline styling.
+This repository is a personal blog and project portfolio built with Jekyll and hosted on GitHub Pages. The content is primarily Markdown pages and custom HTML/CSS embedded in the root-level pages; there is no application server, API layer, or unit-test suite to run beyond the Jekyll site build.
 
-## Architecture & Structure
+## Build, test, and validation commands
 
-```
-elbow86.github.io/
-├── index.md              # Landing page with custom HTML/CSS cards
-├── _config.yml           # Jekyll config (Minima theme)
-├── YYYY-MMM-DD.md        # Blog posts (date-based naming)
-├── CHANGELOG.md          # Manual changelog
-├── _site/                # Generated output (git-ignored)
-└── vendor/               # Ruby dependencies
-```
-
-**Key Point**: Blog posts live at root level, not in `_posts/` directory. Jekyll converts them to HTML using the `page` layout.
-
-## Development Workflow
-
-### Starting the Local Server
+Use the repo's Bundler workflow from the project root:
 
 ```bash
-cd /workspaces/repos/pages/elbow86.github.io
+bundle install
+bundle exec jekyll build
 bundle exec jekyll serve --livereload
 ```
 
-- Server runs on `http://127.0.0.1:4000`
-- Press Ctrl+C to stop
-- Clear cache if issues: `bundle exec jekyll clean`
+Key notes:
+- `bundle exec jekyll build` is the main validation step. It catches broken front matter, invalid Markdown, and broken Liquid/Jekyll rendering.
+- `bundle exec jekyll serve --livereload` is the local preview workflow; open `http://127.0.0.1:4000`.
+- If the generated site gets stale or a build appears stuck, run `bundle exec jekyll clean` before rebuilding.
+- There are no dedicated JS/TS or Ruby test commands in this repo. Treat a successful Jekyll build as the default correctness check for content changes.
 
-### Adding a New Blog Post
+## High-level architecture
 
-1. **Create file** with date-based naming:
-   - Format: `YYYY-MMM-DD.md` (e.g., `2026-Feb-01.md`)
-   - Or: `YYYY-MMM.md` for monthly summaries
+This is a static Jekyll site, not a traditional web app:
 
-2. **Use this frontmatter template**:
-   ```markdown
-   ---
-   layout: page
-   title: Your Post Title Here
-   ---
-   # Your Post Title
-   
-   Your content here...
-   ```
+- `_config.yml` sets the site metadata, theme, and Jekyll options.
+- `index.md` is the homepage and contains both front matter and custom HTML/CSS markup for the landing page and timeline cards.
+- Blog entries are written as root-level Markdown files such as `2026-Jan-29.md`, `2026-Feb-1.md`, and `2026-May-24.md` instead of the usual `_posts/` structure.
+- Jekyll renders these Markdown files to HTML at build time; links should therefore point to the generated HTML paths (for example `./2026-Jan-29.html`).
+- `_site/` is generated output; do not edit it manually.
+- `vendor/` contains the Ruby bundle used for local development.
+- GitHub Pages deploys the site automatically from the default branch; there is no build pipeline logic in the repo itself beyond Jekyll.
 
-3. **Update [`index.md`](index.md)** - Add card to "Recent Adventures" section:
-   ```html
-   <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #2c5282; margin-bottom: 1.5rem;">
-     <h3 style="margin-top: 0; color: #1e3a5f;">📅 <a href="./2026-Feb-01.html">February 1, 2026</a></h3>
-     <p style="margin-bottom: 0; color: #6c757d;">Brief description</p>
-   </div>
-   ```
+## Project conventions that matter here
 
-4. **Update [`CHANGELOG.md`](CHANGELOG.md)** with the new post details
+### Content layout and naming
+- Blog posts live at the repository root, not under `_posts/`.
+- Use date-based filenames such as `YYYY-MMM-DD.md` or monthly summaries like `YYYY-MMM.md`.
+- Keep the title and filename aligned with the post date and subject.
 
-## Critical Conventions
+### Front matter and page structure
+Use the standard pattern for posts:
 
-### File Naming
-- Blog posts: `YYYY-MMM-DD.md` (e.g., `2026-Jan-29.md`)
-- **NO underscores or `_posts/` directory** - posts are root-level files
+```yaml
+---
+layout: page
+title: Your Post Title
+---
 
-### Internal Linking
-- Use `.html` extension, not `.md`: `[Link](./2026-Jan-29.html)`
-- Jekyll converts `.md` to `.html` during build
-- Relative paths: `./filename.html`
+# Your Post Title
 
-### Styling
-Custom inline styling with blue color palette:
-- Primary: `#1e3a5f`
-- Secondary: `#2c5282`
-- Accent: `#4a6fa5`
-- Card backgrounds: `#f8f9fa` with colored left borders
-- See [`index.md`](index.md) for card and gradient header examples
+Your content here...
+```
 
-### Layouts
-- Blog posts use: `layout: page`
-- Home page uses: `layout: home`
-- Theme is Minima 2.5.2 (see [`_config.yml`](_config.yml))
+- `layout: page` is the normal choice for standalone blog entries.
+- `index.md` has a custom `layout: home` front matter and embeds the homepage cards and project sections directly in the page.
 
-## Deployment
+### Internal linking
+- Prefer relative links to the generated HTML page: `[Link Text](./2026-Jan-29.html)`.
+- Do not link to source Markdown files as if they were the published route; Jekyll publishes HTML.
+- Use the same relative path convention for cross-post navigation and homepage cards.
 
-- **Automatic**: Push to `main` branch triggers GitHub Pages deployment
-- **Live in 1-2 minutes** at https://elbow86.github.io
-- Check "Actions" tab for build status
+### Homepage and changelog updates
+When adding or changing posts, update the related content in the same repo:
+- Add/update the relevant card or timeline item in `index.md`.
+- Update `CHANGELOG.md` for user-visible content changes.
+- Keep the post date in both the filename and the page content consistent.
 
-## Common Tasks
+### Styling conventions
+- Styling is intentionally custom and inline-heavy rather than separated into a large stylesheet.
+- The visual system uses the existing blue palette from the current homepage (`#1e3a5f`, `#2c5282`, `#4a6fa5`, and light card backgrounds).
+- Reuse the same card patterns and subtle border accents instead of introducing a completely different layout style.
 
-**Update site title/description**: Edit [`_config.yml`](_config.yml)
+## Notes for future Copilot sessions
 
-**Modify homepage layout**: Edit [`index.md`](index.md) (custom HTML/CSS embedded)
+- Keep changes content-first: this repository is mostly static writing, reference links, and markdown pages.
+- Prefer minimal edits that preserve the existing site tone and structure.
+- Do not add framework or build tooling unless the project explicitly requires it.
+- If you need to verify a content change visually, use the local Jekyll server and inspect the rendered page in the browser.
 
-**View recent changes**: Check [`CHANGELOG.md`](CHANGELOG.md)
+## Relevant docs to consult
 
-**Rebuild site**: `bundle exec jekyll build`
-
-## Known Patterns
-
-- **Manual index updates**: No automation - must manually add cards to `index.md` when creating posts
-- **Changelog discipline**: Update `CHANGELOG.md` for all content changes
-- **External projects**: Links to external demos (moonunit.ca domain) in Project Showcase section
-- **Date consistency**: File names must match post titles/dates
+- `README.md` for setup and publishing expectations.
+- `_config.yml` for site-wide metadata and theme configuration.
+- `CHANGELOG.md` for recent content and release history.
+- `index.md` for homepage conventions and card patterns.

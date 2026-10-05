@@ -45,14 +45,16 @@ ai_blogs:
 ## 🚀 Recent Adventures
 
 <div class="adventures-shell reveal-up reveal-up-delay-1">
-  <a class="adventure-featured" href="./2026-May-24.html">
+  <a class="adventure-featured" href="./2026-Oct-05.html">
     <span class="adventure-featured-badge">Latest Log</span>
-    <h3>March Through May Projects</h3>
-    <p>Ralph Loop, Copilot Assistant, Codex and Claude workflows, and the LLM Wiki all in one sprint recap.</p>
-    <span class="adventure-featured-meta">2026-05-24 • Read entry -></span>
+    <h3>WSL Docker experiments and AI workflow notes</h3>
+    <p>Immich, NextCloud, Mistral Vibe feature ideas, and a Karpathy-inspired ASD-STE100 review of recent AI conversations.</p>
+    <span class="adventure-featured-meta">2026-10-05 • Read entry -></span>
   </a>
 
   <div class="adventure-timeline" role="list" aria-label="Recent adventures timeline">
+    <a class="adventure-row" role="listitem" href="./2026-Oct-05.html"><span class="adventure-date">2026-10-05</span><span class="adventure-main"><span class="adventure-title">WSL Docker experiments and AI workflow notes</span><span class="adventure-tags"><span class="adventure-tag">Docker</span><span class="adventure-tag">AI tools</span></span></span></a>
+    <a class="adventure-row" role="listitem" href="./2026-May-24.html"><span class="adventure-date">2026-05-24</span><span class="adventure-main"><span class="adventure-title">March Through May Projects</span><span class="adventure-tags"><span class="adventure-tag">AI projects</span><span class="adventure-tag">Workflow</span></span></span></a>
     <a class="adventure-row" role="listitem" href="./2026-Mar-08.html"><span class="adventure-date">2026-03-08</span><span class="adventure-main"><span class="adventure-title">Harnessing OpenClaw - Orchestrating Multiple AI Agents</span><span class="adventure-tags"><span class="adventure-tag">AI agents</span><span class="adventure-tag">Orchestration</span></span></span></a>
     <a class="adventure-row" role="listitem" href="./2026-Feb-7.html"><span class="adventure-date">2026-02-07</span><span class="adventure-main"><span class="adventure-title">Home Assistant MCP Server</span><span class="adventure-tags"><span class="adventure-tag">Home automation</span><span class="adventure-tag">MCP</span></span></span></a>
     <a class="adventure-row" role="listitem" href="./2026-Feb-1.html"><span class="adventure-date">2026-02-01</span><span class="adventure-main"><span class="adventure-title">Skills vs Instructions in AI Agent Configuration</span><span class="adventure-tags"><span class="adventure-tag">AI config</span><span class="adventure-tag">Prompting</span></span></span></a>
@@ -109,7 +111,7 @@ ai_blogs:
 ---
 
 <div class="home-footer-note">
-  <p>✨ Built with Jekyll • Hosted on GitHub Pages • Updated May 2026</p>
+  <p>✨ Built with Jekyll • Hosted on GitHub Pages • Updated October 2026</p>
 </div>
 
 
