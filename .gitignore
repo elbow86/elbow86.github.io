@@ -5,10 +5,8 @@ _site/
 vendor/bundle/
 .DS_Store
 node_modules/
-Gemfile.lock
 .env
 .vscode/
-Gemfile
 jekyll.log
 
 diagnosing/
